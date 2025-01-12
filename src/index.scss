@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 body {
   margin: 0;
   font-family: 'Inter', system-ui;
@@ -122,6 +124,10 @@ header {
   .greenButton {
     position: relative;
 
+    &:disabled {
+      animation: button-loading 0.6s ease-in-out infinite;
+    }
+
     &:hover {
       img {
         transform: translateX(5px)
@@ -154,12 +160,17 @@ header {
     margin-left: 20px;
   }
 
+  &:disabled {
+    background-color: #bebebe !important;
+    cursor: default;
+  }
+
   &:hover {
-    background: lighten(#9dd558, 10%)
+    background: color.adjust(#9dd558, $lightness: 10%);
   }
 
   &:active {
-    background: darken(#9dd558, 10%)
+    background: color.adjust(#9dd558, $lightness: -10%);
   }
 
 }
@@ -196,6 +207,20 @@ header {
   transition: opacity 0.2s ease-in-out;
 
   &:hover {
+    opacity: 1;
+  }
+}
+
+@keyframes button-loading {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
     opacity: 1;
   }
 }
